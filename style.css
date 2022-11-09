@@ -1,0 +1,149 @@
+html {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    background:
+        linear-gradient(135deg, #dadada 25%, transparent 25%) -50px 0,
+        linear-gradient(225deg, #dadada 25%, transparent 25%) -50px 0,
+        linear-gradient(315deg, #dadada 25%, transparent 25%),
+        linear-gradient(045deg, #dadada 25%, transparent 25%);
+    background-size: 100px 70px;
+    background-color: #d2d2d2;
+}
+
+body {
+    background-color: transparent;
+}
+
+html, select, button, input {
+    font-size: 20pt;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ol {
+    padding: 0;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 2em;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+input, select, button {
+    padding: 0.5em;
+    border-radius: 2em;
+    border: 2px black solid;
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    padding-left: 1em;
+}
+
+div[hidden] {
+    display: none !important;
+}
+
+.page {
+    display: flex;
+    flex-direction: row
+}
+
+#submissions-container {
+    flex-grow: 1;
+}
+
+#buzzer {
+    background: brown;
+    color: floralwhite;
+    border: 3px transparent solid;
+    border-radius: 100%;
+    height: 8em;
+    width: 8em;
+    margin: 1em;
+}
+
+#buzzer:hover {
+    border: 3px floralwhite solid;
+    cursor: pointer;
+}
+
+#buzzer:active {
+    border: 10px floralwhite double;
+}
+
+#buzzer:disabled {
+    background-color: #916c6c;
+    text-decoration: line-through;
+    text-decoration-style: wavy;
+    border: 3px transparent solid;
+    cursor: default;
+}
+
+#buzzer.map-buzzer {
+    border-radius: 1em 1em 0em 0em;
+    width: 100%;
+    height: 2em;
+    padding: 0;
+    margin: 0;
+}
+
+.infos-column {
+    min-width: 33%;
+}
+
+.input-column {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#map-answer-container[disabled] {
+    pointer-events: none;
+    opacity: .7;
+}
+
+.panel {
+    margin: 0.2em;
+    border: 2px black solid;
+    border-radius: 0.5em;
+    padding: 1em;
+    background-color: #ffffffab;
+}
+
+.host-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.host-controls button {
+    margin-left: 1em;
+}
+
+#toast-container {
+    position: fixed;
+    pointer-events: none;
+}
+
+#toasts li {
+    border-radius: 1em;
+    background-color: lightblue;
+    margin: 0.5em;
+    padding: 0.5em;
+    width: fit-content;
+    opacity: 0.8;
+    border: 2px black dotted;
+}
