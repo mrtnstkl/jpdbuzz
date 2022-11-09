@@ -18,7 +18,7 @@ export function startHost(port) {
 export function startClient(port) {
     const clientPath = "./client"
     const clientFiles = [
-        "/index.html", "/script.js", "/location-picker/leaflet-locationpicker.css", "/location-picker/leaflet-locationpicker.js"
+        "/index.html", "/script.js", "/leaflet-locationpicker.css", "/leaflet-locationpicker.js", "/mousetrap.min.js"
     ]
     let clientResources = new Map;
     for (const file of clientFiles) {

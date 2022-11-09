@@ -63,18 +63,28 @@ function resetBuzzers() {
     document.getElementById('iTextAnswer').removeAttribute("disabled");
 }
 
+var buzzerLocked = false;
+
 function unlockBuzzer() {
+    buzzerLocked = false;
     document.getElementById('buzzer').removeAttribute("disabled");
     document.getElementById('iTextAnswer').removeAttribute("disabled");
     document.getElementById('map-answer-container').removeAttribute("disabled");
 }
 function lockBuzzer() {
+    buzzerLocked = true;
     document.getElementById('buzzer').setAttribute('disabled', '');
     document.getElementById('iTextAnswer').setAttribute('disabled', '');
     document.getElementById('map-answer-container').setAttribute('disabled', '');
 }
 
-window.pressBuzzer = function () {
+Mousetrap.bind("enter", pressBuzzer);
+Mousetrap.bind("space", pressBuzzer);
+
+function pressBuzzer() {
+    if (buzzerLocked) {
+        return;
+    }
     lockBuzzer();
     let answer;
     switch (lobbyMode) {
@@ -84,12 +94,13 @@ window.pressBuzzer = function () {
         case 'map':
             answer = document.getElementById('geoloc').value;
             break;
-
         default:
             break;
     }
     wsSend("submission", { answer: answer });
 }
+
+window.pressBuzzer = pressBuzzer;
 
 window.joinLobby = function (name) {
     wsSend("request-join", { name: name });
