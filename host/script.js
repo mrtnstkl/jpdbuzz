@@ -1,7 +1,9 @@
-const serverWsPort = 8088; // host websocket port 
+import * as config from "../config.js";
 
-const serverUrl = "ws://localhost:" + serverWsPort;
+//const serverUrl = "ws://" + config.serverIp + ":" + config.hostWsPort;
+const serverUrl = "ws://localhost:" + config.hostWsPort;
 const websocket = new WebSocket(serverUrl);
+
 
 var domUsersList = document.getElementById("users-list");
 var domSubmissionsList = document.getElementById("submissions-list");

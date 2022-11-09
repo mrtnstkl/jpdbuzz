@@ -1,7 +1,6 @@
-const wsPort = 8086; // client websocket port 
-const serverIp = '84.114.42.250'; // <-------- CHANGE THIS TO THE SERVERS IP !!!
+import * as config from "../config.js";
 
-const serverUrl = "ws://" + serverIp + ":" + wsPort;
+const serverUrl = "ws://" + config.serverIp + ":" + config.clientWsPort;
 const websocket = new WebSocket(serverUrl);
 
 

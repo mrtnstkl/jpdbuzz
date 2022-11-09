@@ -12,6 +12,7 @@ export function startHost(port) {
         hostResources.set(file, fs.readFileSync(hostPath + file))
     }
     hostResources.set("/style.css", fs.readFileSync(hostPath + "/../style.css"));
+    hostResources.set("/config.js", fs.readFileSync(hostPath + "/../config.js"));
     createServer(hostResources).listen(port);
 }
 export function startClient(port) {
@@ -24,6 +25,7 @@ export function startClient(port) {
         clientResources.set(file, fs.readFileSync(clientPath + file))
     }
     clientResources.set("/style.css", fs.readFileSync(clientPath + "/../style.css"));
+    clientResources.set("/config.js", fs.readFileSync(clientPath + "/../config.js"));
     createServer(clientResources).listen(port);
 }
 
