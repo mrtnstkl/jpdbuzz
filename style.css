@@ -43,7 +43,7 @@ td:last-child {
 main {
     margin: 0 auto;
     max-width: 800px;
-    padding: 2em;
+    padding: 2em 0;
 }
 
 h1, h2 {
@@ -132,11 +132,9 @@ div[hidden] {
     align-items: center;
 }
 
-#map-answer-container[disabled] {
-    pointer-events: none;
-    opacity: .7;
+#map {
+    cursor: default;
 }
-
 
 .panel {
     margin: 0.2em;
@@ -144,6 +142,15 @@ div[hidden] {
     border-radius: 0.5em;
     padding: 1em;
     background-color: #ffffffab;
+}
+
+.input-column {
+    margin-left: 10px;
+}
+
+.input-column #map {
+    border-radius: 0px 0px 1.5em 1.5em;
+    box-shadow: 0px 3px 6px 1px #00000017;
 }
 
 .host-controls {
