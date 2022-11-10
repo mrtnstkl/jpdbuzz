@@ -62,9 +62,16 @@ window.resetLobby = function (mode) {
     domSubmissionsList.innerHTML = "";
 }
 
+const buzzerAudio = new Audio('./../buzzer.wav');
+buzzerAudio.loop = false;
+buzzerAudio.volume = 0.5;
+
 function handleSubmission(user, answer) {
     switch (lobbyMode) {
         case 'buzzer':
+            if (domSubmissionsList.children.length == 0) {
+                buzzerAudio.play();
+            }
             domSubmissionsList.innerHTML +=
                 `<li> ${user} </li>`;
             break;

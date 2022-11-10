@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
     domSubmissionsList = document.getElementById("submissions-list");
 });
 
+const buzzerAudio = new Audio('./../buzzer.wav');
+buzzerAudio.loop = false;
+buzzerAudio.volume = 0.5;
 
 var lobbyMode;
 
@@ -36,6 +39,9 @@ const messageHandlers = new Map([
     }],
 
     ["submission", data => {
+        if (lobbyMode == 'buzzer' && domSubmissionsList.children.length == 0) {
+            buzzerAudio.play();
+        }
         domSubmissionsList.innerHTML +=
             `<li> ${data.user} </li>`;
     }],
