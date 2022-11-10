@@ -48,6 +48,7 @@ window.resetLobby = function (mode) {
             break;
         case 'map':
             document.getElementById('map-answer-container').removeAttribute('hidden');
+            window.resetMap();
             break;
         case 'text':
             document.getElementById('map-answer-container').setAttribute('hidden', '');
@@ -58,7 +59,6 @@ window.resetLobby = function (mode) {
     showToast("buzzers reset to " + mode + " mode");
     wsSend('reset-buzzers', { mode: mode });
     domSubmissionsList.innerHTML = "";
-    window.resetMap();
 }
 
 function handleSubmission(user, answer) {
