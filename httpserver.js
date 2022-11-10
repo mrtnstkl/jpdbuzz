@@ -5,7 +5,7 @@ import fs from 'fs';
 export function startHost(port) {
     const hostPath = "./host"
     const hostFiles = [
-        "/index.html", "/script.js", "/../style.css"
+        "/index.html", "/script.js", "/../style.css", "/map.js"
     ]
     let hostResources = new Map;
     for (const file of hostFiles) {
@@ -18,7 +18,7 @@ export function startHost(port) {
 export function startClient(port) {
     const clientPath = "./client"
     const clientFiles = [
-        "/index.html", "/script.js", "/leaflet-locationpicker.css", "/leaflet-locationpicker.js", "/mousetrap.min.js"
+        "/index.html", "/script.js", "/mousetrap.min.js", "/map.js"
     ]
     let clientResources = new Map;
     for (const file of clientFiles) {

@@ -61,18 +61,19 @@ function resetBuzzers() {
     document.getElementById('buzzer').removeAttribute("disabled");
     document.getElementById('iTextAnswer').value = "";
     document.getElementById('iTextAnswer').removeAttribute("disabled");
+    window.resetMap();
 }
 
-var buzzerLocked = false;
+window.buzzerLocked = false;
 
 function unlockBuzzer() {
-    buzzerLocked = false;
+    window.buzzerLocked = false;
     document.getElementById('buzzer').removeAttribute("disabled");
     document.getElementById('iTextAnswer').removeAttribute("disabled");
     document.getElementById('map-answer-container').removeAttribute("disabled");
 }
 function lockBuzzer() {
-    buzzerLocked = true;
+    window.buzzerLocked = true;
     document.getElementById('buzzer').setAttribute('disabled', '');
     document.getElementById('iTextAnswer').setAttribute('disabled', '');
     document.getElementById('map-answer-container').setAttribute('disabled', '');
@@ -82,7 +83,7 @@ Mousetrap.bind("enter", pressBuzzer);
 Mousetrap.bind("space", pressBuzzer);
 
 function pressBuzzer() {
-    if (buzzerLocked) {
+    if (window.buzzerLocked) {
         return;
     }
     lockBuzzer();
@@ -92,7 +93,7 @@ function pressBuzzer() {
             answer = document.getElementById('iTextAnswer').value;
             break;
         case 'map':
-            answer = document.getElementById('geoloc').value;
+            answer = window.pinCoordinate;
             break;
         default:
             break;

@@ -11,10 +11,11 @@ var domSubmissionsList = document.getElementById("submissions-list");
 document.addEventListener("DOMContentLoaded", () => {
     domUsersList = document.getElementById("users-list");
     domSubmissionsList = document.getElementById("submissions-list");
+    window.resetLobby('buzzer');
 });
 
 
-var mode;
+var lobbyMode;
 
 const messageHandlers = new Map([
     ["submission", data => {
@@ -40,15 +41,16 @@ window.setBuzzerLock = function (bool) {
 }
 
 window.resetLobby = function (mode) {
+    lobbyMode = mode;
     switch (mode) {
         case 'buzzer':
-
+            document.getElementById('map-answer-container').setAttribute('hidden', '');
             break;
         case 'map':
-
+            document.getElementById('map-answer-container').removeAttribute('hidden');
             break;
         case 'text':
-
+            document.getElementById('map-answer-container').setAttribute('hidden', '');
             break;
         default:
             break;
@@ -56,17 +58,27 @@ window.resetLobby = function (mode) {
     showToast("buzzers reset to " + mode + " mode");
     wsSend('reset-buzzers', { mode: mode });
     domSubmissionsList.innerHTML = "";
+    window.resetMap();
 }
 
 function handleSubmission(user, answer) {
-    if (answer) {
-        domSubmissionsList.innerHTML +=
-            `<li> ${user}: ${answer} </li>`;
-    } else {
-        domSubmissionsList.innerHTML +=
-            `<li> ${user} </li>`;
+    switch (lobbyMode) {
+        case 'buzzer':
+            domSubmissionsList.innerHTML +=
+                `<li> ${user} </li>`;
+            break;
+        case 'text':
+            domSubmissionsList.innerHTML +=
+                `<li> ${user}: ${answer} </li>`;
+            break;
+        case 'map':
+            if (answer.lat && answer.lng) {
+                window.addMarker(answer, user);
+            }
+            break;
+        default:
+            break;
     }
-
 }
 
 function updateUsers(users) {

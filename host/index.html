@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./../style.css">
+  <link rel="stylesheet" href="//unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
   <script src="script.js" type="module"></script>
   <title>Host - JPDBuzz</title>
 </head>
@@ -18,16 +19,15 @@
 
   <main>
 
+    <!-- map stuff -->
+    <script src="//unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
 
     <h1> Host </h1>
 
     <div class="host-controls panel">
-      <!--select name="iModeSelect" id="iModeSelect">
-        <option value="buzzer"> Buzzer </option>
-        <option value="text"> Text </option>
-        <option value="map"> Map </option>
-      </select>
-      <button onclick="resetLobby(document.getElementById('iModeSelect').value)"> Reset </button-->
       <span> Reset to: </span>
       <button onclick="resetLobby('buzzer')"> Buzzer </button>
       <button onclick="resetLobby('text')"> Text </button>
@@ -45,9 +45,20 @@
         <ol id="submissions-list">
         </ol>
       </div>
+
+
+    </div>
+
+    <div id="map-answer-container" class="panel">
+      <div id="map" data-mode="" style="height: 500px;">
+        <input type="hidden" data-map-markers="" value="" name="map-geojson-data" />
+      </div>
     </div>
 
   </main>
+
+  <script src="map.js"></script>
+
 
 </body>
 

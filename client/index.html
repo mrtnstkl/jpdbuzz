@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./../style.css">
   <link rel="stylesheet" href="//unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
-  <link rel="stylesheet" href="./leaflet-locationpicker.css" /> <!-- map stuff -->
   <script src="mousetrap.min.js"></script>
   <script src="script.js" type="module"></script>
   <title>JPDBuzz</title>
@@ -17,7 +16,8 @@
 
   <!-- map stuff -->
   <script src="//unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
-  <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
 
   <main>
@@ -50,33 +50,17 @@
             onkeypress="(e => { if (e.key == 'Enter') pressBuzzer() })(event)">
         </div>
         <div id="map-answer-container" style="width: 100%;">
-          <form id="fixedContAlwaysOpen" style="width: 100%;">
-            <div>
-              <div id="fixedMapCont" style="border: 1px solid black"></div>
-              <input id="geoloc" type="text" value="" size="20"
-                style="text-align: center; background: transparent; border: none; width: 100%;" disabled />
-            </div>
-          </form>
+          <div id="map" data-mode="" style="height: 500px;">
+            <input type="hidden" data-map-markers="" value="" name="map-geojson-data" />
+          </div>
         </div>
       </div>
 
 
     </div>
   </main>
-  <!-- more map stuff -->
-  <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-  <script src="./leaflet-locationpicker.js"></script>
-  <script>
-    //fix n alwaysOpen
-    $('#geoloc').leafletLocationPicker({
-      alwaysOpen: true,
-      mapContainer: "#fixedMapCont",
-      height: 500,
-      locationMarker: false
-    });
-  </script>
+
+  <script src="map.js"></script>
 
 </body>
 

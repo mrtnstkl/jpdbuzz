@@ -115,6 +115,7 @@ div[hidden] {
     opacity: .7;
 }
 
+
 .panel {
     margin: 0.2em;
     border: 2px black solid;
@@ -147,3 +148,8 @@ div[hidden] {
     opacity: 0.8;
     border: 2px black dotted;
 }
+
+.leaflet-marker-icon {
+    z-index: 1 !important;
+}
+
