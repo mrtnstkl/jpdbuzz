@@ -84,6 +84,7 @@ export function start(port) {
             clients.delete(ws);
             console.log("client disconnected");
             host.sendToHost('users-change', { users: Array.from(names) });
+            broadcast('users-change', { users: Array.from(names) });
         });
     });
 }
