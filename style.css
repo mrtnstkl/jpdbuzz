@@ -148,6 +148,9 @@ div[hidden] {
     opacity: 0.8;
     border: 2px black dotted;
 }
+#toasts li.error {
+    background-color: lightcoral;
+}
 
 .leaflet-marker-icon {
     z-index: 1 !important;

@@ -31,7 +31,7 @@ const messageHandlers = new Map([
     }],
 
     ["join-accept", data => {
-        document.getElementById('login-screen').setAttribute('hidden', 'true');
+        document.getElementById('login-screen').setAttribute('hidden', '');
         document.getElementById('main-screen').removeAttribute('hidden');
         lobbyMode = data.lobbyMode;
         modeUpdate();
@@ -159,6 +159,9 @@ websocket.addEventListener('message', e => {
 
 // react to losing connection to the server
 websocket.addEventListener('close', _ => {
+    document.getElementById('login-screen').setAttribute('hidden', '');
+    document.getElementById('main-screen').setAttribute('hidden', '');
+    alert("connection lost!\nplease reload the page");
 });
 
 /**

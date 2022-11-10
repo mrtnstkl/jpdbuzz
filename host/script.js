@@ -11,9 +11,9 @@ var domSubmissionsList = document.getElementById("submissions-list");
 document.addEventListener("DOMContentLoaded", () => {
     domUsersList = document.getElementById("users-list");
     domSubmissionsList = document.getElementById("submissions-list");
-    window.resetLobby('buzzer');
 });
 
+websocket.onopen = () => window.resetLobby('buzzer');
 
 var lobbyMode;
 
@@ -89,16 +89,20 @@ function updateUsers(users) {
     }
 }
 
-function showToast(text) {
+function showToast(text, isError, isPersistent) {
     let toast = document.createElement('li');
+    if (isError) {
+        toast.classList.add('error');
+    }
     toast.textContent = text;
-    setTimeout(() => {
-        document.getElementById("toasts").removeChild(toast);
-    }, 3000);
+    if (!isPersistent) {
+        setTimeout(() => {
+            document.getElementById("toasts").removeChild(toast);
+        }, 3000);
+    }
     document.getElementById("toasts").appendChild(toast);
 }
 
-// react to receiving a message from the server
 websocket.addEventListener('message', e => {
     const data = JSON.parse(e.data);
 
@@ -116,27 +120,24 @@ websocket.addEventListener('message', e => {
     }
 })
 
-// react to losing connection to the server
 websocket.addEventListener('close', _ => {
+    showToast('connection to server lost - please reload the page', true, true);
 });
 
-/**
- * Sends a websocket message to the server.
- * 
- * @param {string} msgType type of message to send (eg. 'lobby-join')
- * @param {Object} data data to be sent with the message 
- */
 function wsSend(msgType, data) {
     if (!data) {
         data = {};
     }
     data['_msgType'] = msgType;
     console.log('<== ' + msgType, data);
+    if (websocket.readyState !== websocket.OPEN) {
+        showToast('connection not open', true);
+        return;
+    }
     try {
         websocket.send(JSON.stringify(data));
-
     } catch (error) {
-
+        showToast('failed to send message ' + msgType, true);
     }
 }
 
