@@ -73,11 +73,11 @@ function handleSubmission(user, answer) {
                 buzzerAudio.play();
             }
             domSubmissionsList.innerHTML +=
-                `<li> ${user} </li>`;
+                `<tr> <td>${domSubmissionsList.children.length + 1}.</td> <td>${user}</td> <td></td> </tr>`;
             break;
         case 'text':
             domSubmissionsList.innerHTML +=
-                `<li> ${user}: ${answer} </li>`;
+                `<tr> <td>${domSubmissionsList.children.length + 1}.</td> <td>${user}</td> <td>${answer}</td> </tr>`;
             break;
         case 'map':
             if (answer.lat && answer.lng) {

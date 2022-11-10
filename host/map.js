@@ -56,13 +56,15 @@ function calculateDistances() {
     const subList = document.getElementById('submissions-list');
     subList.innerHTML = "";
     console.log(userSubmissions);
+    let i = 1;
     for (let [user, coord] of userSubmissions) {
         console.log(user, coord);
-        if(hostPinCoordinate) {
+        if (hostPinCoordinate) {
             const distance = distanceInKmBetweenEarthCoordinates(hostPinCoordinate.lat, hostPinCoordinate.lng, coord.lat, coord.lng);
-            subList.innerHTML += `<li> ${user}: ${distance > 1 ? distance.toFixed(2) + " km" : (distance * 1000).toFixed(0) + " m"} </li>`;
+            subList.innerHTML +=
+                `<tr> <td>${i++}.</td> <td>${user}</td> <td>${distance > 1 ? distance.toFixed(2) + " km" : (distance * 1000).toFixed(0) + " m"}</td> </tr>`;
         } else {
-            subList.innerHTML += `<li> ${user} </li>`;
+            subList.innerHTML += `<tr> <td>${i++}.</td> <td>${user}</td> <td></td> </tr>`;
         }
     }
 }
