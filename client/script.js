@@ -10,8 +10,6 @@ var domSubmissionsList = document.getElementById("submissions-list");
 document.addEventListener("DOMContentLoaded", () => {
     domUsersList = document.getElementById("users-list");
     domSubmissionsList = document.getElementById("submissions-list");
-    window.dispatchEvent(new Event('resize'));
-    console.log("foo");
 });
 
 

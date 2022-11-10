@@ -49,6 +49,7 @@ window.resetLobby = function (mode) {
         case 'map':
             document.getElementById('map-answer-container').removeAttribute('hidden');
             window.resetMap();
+            window.dispatchEvent(new Event('resize'));
             break;
         case 'text':
             document.getElementById('map-answer-container').setAttribute('hidden', '');
