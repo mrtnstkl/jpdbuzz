@@ -3,36 +3,35 @@ import url from 'url';
 import fs from 'fs';
 
 export function startHost(port) {
-    const hostPath = "./host"
-    const hostFiles = [
-        "/index.html", "/script.js", "/../style.css", "/map.js"
-    ]
-    let hostResources = new Map;
-    for (const file of hostFiles) {
-        hostResources.set(file, fs.readFileSync(hostPath + file))
-    }
-    hostResources.set("/style.css", fs.readFileSync(hostPath + "/../style.css"));
-    hostResources.set("/config.js", fs.readFileSync(hostPath + "/../config.js"));
-    hostResources.set("/buzzer.wav", fs.readFileSync(hostPath + "/../buzzer.wav"));
-    createServer(hostResources).listen(port);
+    let resources = new Map;
+    const setResource = (path, filePath) => { resources.set(path, fs.readFileSync(filePath)) };
+
+    setResource("/index.html", "./host/index.html")
+    setResource("/script.js", "./host/script.js")
+    setResource("/map.js", "./host/map.js")
+    setResource("/style.css", "./style.css");
+    setResource("/config.js", "./config.js");
+    setResource("/buzzer.wav", "./buzzer.wav");
+
+    createServer(resources).listen(port);
 }
+
 export function startClient(port) {
-    const clientPath = "./client"
-    const clientFiles = [
-        "/index.html", "/script.js", "/mousetrap.min.js", "/map.js"
-    ]
-    let clientResources = new Map;
-    for (const file of clientFiles) {
-        clientResources.set(file, fs.readFileSync(clientPath + file))
-    }
-    clientResources.set("/style.css", fs.readFileSync(clientPath + "/../style.css"));
-    clientResources.set("/config.js", fs.readFileSync(clientPath + "/../config.js"));
-    clientResources.set("/buzzer.wav", fs.readFileSync(clientPath + "/../buzzer.wav"));
-    createServer(clientResources).listen(port);
+    let resources = new Map;
+    const setResource = (path, filePath) => { resources.set(path, fs.readFileSync(filePath)) };
+
+    setResource("/index.html", "./client/index.html")
+    setResource("/script.js", "./client/script.js")
+    setResource("/map.js", "./client/map.js")
+    setResource("/mousetrap.min.js", "./client/mousetrap.min.js")
+    setResource("/style.css", "./style.css");
+    setResource("/config.js", "./config.js");
+    setResource("/buzzer.wav", "./buzzer.wav");
+
+    createServer(resources).listen(port);
 }
 
 function createServer(resources) {
-
     return http.createServer(function (request, response) {
         const error = function (status = 500) {
             response.writeHead(status);
