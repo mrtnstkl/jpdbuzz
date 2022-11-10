@@ -58,6 +58,15 @@ input, select, button {
 
 button {
     cursor: pointer;
+    background-color: #E9E9ED;
+}
+
+button:hover {
+    background-color: #D0D0D7;
+}
+
+button:active {
+    background-color: #B1B1B9;
 }
 
 input {
