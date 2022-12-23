@@ -90,18 +90,24 @@ function pressBuzzer() {
     if (window.buzzerLocked) {
         return;
     }
-    lockBuzzer();
     let answer;
     switch (lobbyMode) {
         case 'text':
             answer = document.getElementById('iTextAnswer').value;
+            if (answer == "") {
+                return;
+            }
             break;
         case 'map':
             answer = window.pinCoordinate;
+            if (answer == null) {
+                return;
+            }
             break;
         default:
             break;
     }
+    lockBuzzer();
     wsSend("submission", { answer: answer });
 }
 
