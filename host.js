@@ -21,6 +21,12 @@ var messageHandlers = new Map([
         client.broadcast('set-buzzer-lock', { locked: data.locked });
     }],
 
+    ["update-user-points", data => {
+        for (let user of data.users) {
+            client.points.set(user.name, user.points);
+            client.broadcast('update-user-points', data);
+        }
+    }],
 
 ]);
 
@@ -39,7 +45,7 @@ export function start(port) {
         socket = ws;
         console.log("host connected");
 
-        sendToHost('users-change', { users: Array.from(client.names) });
+        sendToHost('users-change', { users: Array.from(client.points, ([name, points]) => ({ name, points })) });
         client.broadcast('reset-buzzers', { mode: lobbyMode, locked: false });
 
         ws.on("message", data_buf => {

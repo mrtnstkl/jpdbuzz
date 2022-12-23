@@ -8,7 +8,8 @@ const decoder = new StringDecoder('utf8');
 
 var clients = new Set;
 export var names = new Set;
-var clientNames = new Map;
+export var points = new Map // maps names to points
+var clientNames = new Map; // maps websockets to names
 
 
 var messageHandlers = new Map([
@@ -24,14 +25,16 @@ var messageHandlers = new Map([
         }
         clients.add(ws);
         names.add(data.name);
+        points.set(data.name, 0);
         clientNames.set(ws, data.name);
         console.log(data.name + " joined");
         // accept join request
         sendToClient(ws, 'join-accept', { lobbyMode: host.lobbyMode });
         // notify host of user change
-        host.sendToHost('users-change', { users: Array.from(names) });
+        host.sendToHost('users-change', { users: Array.from(points, ([name, points]) => ({ name, points })) });
         // notify clients of user change
-        broadcast('users-change', { users: Array.from(names) });
+        broadcast('users-change', { users: Array.from(points, ([name, points]) => ({ name, points })) });
+        console.log(points);
     }],
 
     ["submission", (data, ws) => {
@@ -80,11 +83,12 @@ export function start(port) {
 
         ws.on("close", () => {
             names.delete(clientNames.get(ws));
+            points.delete(clientNames.get(ws));
             clientNames.delete(ws);
             clients.delete(ws);
             console.log("client disconnected");
-            host.sendToHost('users-change', { users: Array.from(names) });
-            broadcast('users-change', { users: Array.from(names) });
+            host.sendToHost('users-change', { users: Array.from(points, ([name, points]) => ({ name, points })) });
+            broadcast('users-change', { users: Array.from(points, ([name, points]) => ({ name, points })) });
         });
     });
 }

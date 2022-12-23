@@ -40,6 +40,10 @@ window.setBuzzerLock = function (bool) {
     wsSend('set-buzzer-lock', { locked: bool });
 }
 
+window.updateUserPoints = function (user, points) {
+    wsSend('update-user-points', { users: [{ name: user, points: points }] })
+}
+
 window.resetLobby = function (mode) {
     lobbyMode = mode;
     switch (mode) {
@@ -93,7 +97,11 @@ function updateUsers(users) {
     domUsersList.innerHTML = "";
     for (const user of users) {
         domUsersList.innerHTML +=
-            `<li> ${user} </li>`;
+            `<tr> 
+                <td>${user.name}</td>
+                <td><input type="number" class="user-points-input"
+                        onchange="updateUserPoints('${user.name}',this.value)" value="${user.points}"></td>
+            </tr>`;
     }
 }
 

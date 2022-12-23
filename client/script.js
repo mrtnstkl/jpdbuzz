@@ -18,6 +18,8 @@ buzzerAudio.volume = 0.5;
 
 var lobbyMode;
 
+var users = new Map; // maps usernames to points
+
 const messageHandlers = new Map([
     ["reset-buzzers", data => {
         // update lobby mode
@@ -47,7 +49,18 @@ const messageHandlers = new Map([
     }],
 
     ["users-change", data => {
-        updateUsers(data.users);
+        users.clear();
+        for (const user of data.users) {
+            users.set(user.name, user.points);
+        }
+        updateUsers();
+    }],
+
+    ["update-user-points", data => {
+        for (const user of data.users) {
+            users.set(user.name, user.points);
+        }
+        updateUsers();
     }],
 
     ["set-buzzer-lock", data => {
@@ -118,11 +131,11 @@ window.joinLobby = function (name) {
 }
 
 
-function updateUsers(users) {
+function updateUsers() {
     domUsersList.innerHTML = "";
-    for (const user of users) {
+    for (const [name, points] of users.entries()) {
         domUsersList.innerHTML +=
-            `<li> ${user} </li>`;
+            `<tr><td> ${name}: </td><td> ${points} </td></tr>`;
     }
 }
 
