@@ -13,7 +13,8 @@ import * as httpserver from './httpserver.js'
 
     console.log(
         `Host inteface hosted on http://localhost:${config.hostHttpPort} \n` +
-        `Client inteface hosted on http://${config.serverIp}:${config.clientHttpPort} \n` +
-        `Make sure that ports ${config.clientHttpPort} and ${config.clientWsPort} are forwarded. \n`
+        `Client inteface hosted on http://localhost:${config.clientHttpPort} \n` +
+        `Make sure that ports ${config.clientHttpPort} and ${config.clientWsPort} are forwarded. \n` + 
+        `If the host interface should be accessible to the outside, also forward ${config.hostHttpPort} and ${config.hostWsPort}. \n`
     );
 })();

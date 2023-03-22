@@ -1,6 +1,6 @@
 import * as config from "../config.js";
 
-const serverUrl = "ws://" + config.serverIp + ":" + config.clientWsPort;
+const serverUrl = "ws://" + window.location.hostname + ":" + config.clientWsPort;
 const websocket = new WebSocket(serverUrl);
 
 
